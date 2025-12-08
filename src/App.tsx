@@ -8,6 +8,9 @@ import AlertUI from './components/AlertUI';
 import SelectorUI from './components/SelectorUI';
 import IndicatorUI from './components/IndicatorUI';
 import useFetchData from './functions/useFetchData';
+import TableUI from './components/TableUI';
+import ChartUI from './components/ChartUI';
+
 
 function App() {
   //const [count, setCount] = useState(0)
@@ -74,10 +77,14 @@ function App() {
         </Grid>
 
         {/* Gráfico */}
-        <Grid sx={{ display: { xs: "none", md: "block" } }} size={{ xs: 12, md: 6 }}>Elemento: Gráfico</Grid>
+        <Grid sx={{ display: { xs: "none", md: "block" } }} size={{ xs: 12, md: 6 }}>
+          <ChartUI />
+        </Grid>
 
         {/* Tabla */}
-        <Grid sx={{ display: { xs: "none", md: "block" } }} size={{ xs: 12, md: 6 }}>Elemento: Tabla</Grid>
+        <Grid sx={{ display: { xs: "none", md: "block" } }} size={{ xs: 12, md: 6 }}>
+          <TableUI />
+        </Grid>
 
         {/* Información adicional */}
         <Grid size={{ xs: 12, md: 12 }}>Elemento: Información adicional</Grid>
