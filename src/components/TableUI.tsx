@@ -2,7 +2,11 @@ import Box from "@mui/material/Box";
 import { DataGrid, type GridColDef } from "@mui/x-data-grid";
 import useFetchData from "../functions/useFetchData";
 
-function combineArrays(arrLabels: Array<string>, arrValues1: Array<number>, arrValues2: Array<number>) {
+function combineArrays(
+  arrLabels: Array<string>,
+  arrValues1: Array<number>,
+  arrValues2: Array<number>
+) {
   return arrLabels.map((label, index) => ({
     id: index,
     label: label,
@@ -13,21 +17,9 @@ function combineArrays(arrLabels: Array<string>, arrValues1: Array<number>, arrV
 
 const columns: GridColDef[] = [
   { field: "id", headerName: "ID", width: 90 },
-  { 
-    field: "label", 
-    headerName: "Hora", 
-    width: 180 
-  },
-
-  { field: "value1", 
-    headerName: "Temperatura (°C)", 
-    width: 180 
-  },
-
-  { field: "value2", 
-    headerName: "Viento (Km/h)", 
-    width: 180 
-  },
+  { field: "label", headerName: "Hora", width: 180 },
+  { field: "value1", headerName: "Temperatura (°C)", width: 180 },
+  { field: "value2", headerName: "Viento (Km/h)", width: 180 },
   {
     field: "resumen",
     headerName: "Resumen",
@@ -40,12 +32,16 @@ const columns: GridColDef[] = [
   },
 ];
 
-export default function TableUI() {
-  const { data, loading, error } = useFetchData();
+interface TableUIProps {
+  city: string | null;
+}
+
+export default function TableUI({ city }: TableUIProps) {
+  const { data, loading, error } = useFetchData(city);
 
   if (loading) return <p>Cargando datos meteorológicos...</p>;
   if (error) return <p>Error: {error}</p>;
-  if (!data) return <p>No hay datos disponibles</p>; 
+  if (!data) return <p>No hay datos disponibles</p>;
 
   const arrLabels = data.hourly.time;
   const arrValues1 = data.hourly.temperature_2m;
@@ -60,9 +56,7 @@ export default function TableUI() {
         columns={columns}
         initialState={{
           pagination: {
-            paginationModel: {
-              pageSize: 10,
-            },
+            paginationModel: { pageSize: 10 },
           },
         }}
         pageSizeOptions={[5, 10, 20]}
