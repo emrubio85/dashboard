@@ -11,9 +11,15 @@ import useFetchData from './functions/useFetchData';
 import TableUI from './components/TableUI';
 import ChartUI from './components/ChartUI';
 import { useState } from 'react';
-
+import ExtraInfoUI from "./components/ExtraInfoUI";
+import RecommendationsUI from './components/RecommendationsUI';
 
 function App() {
+  const [theme, setTheme] = useState<"light" | "dark">("light");
+  const toggleTheme = () => {
+    const newTheme = theme === "light" ? "dark" : "light"; setTheme(newTheme);
+    document.documentElement.setAttribute("data-theme", newTheme);
+  };
   // Utilice una variable de estado para almacenar la opción seleccionada por el usuario
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
   //const [count, setCount] = useState(0)
@@ -32,13 +38,20 @@ function App() {
 
       <Grid container spacing={5} justifyContent="center" alignItems="center">
         {/* Encabezado */}
-        <Grid size={{ xs: 12, md: 12 }}> <HeaderUI></HeaderUI></Grid>
+        <Grid item xs={12} md={12}>
+          <HeaderUI>
+            {/* Botón de modo oscuro */}
+            <button onClick={toggleTheme}>
+              {theme === "light" ? "🌙 Modo oscuro" : "☀️ Modo claro"}
+            </button>
+          </HeaderUI>
+        </Grid>
 
         {/* Alertas */}
         <Grid size={{ xs: 12, md: 12 }} justifyContent="right" alignItems="center" ><AlertUI description="No se preveen lluvias" /></Grid>
 
         {/* Selector */}
-        <Grid size={{ xs: 12, md: 3 }}><SelectorUI onOptionSelect={setSelectedOption} /></Grid>
+        <Grid size={{ xs: 12, md: 3 }}><SelectorUI value={selectedOption} onOptionSelect={setSelectedOption} /></Grid>
 
         {/* Indicadores */}
         <Grid container spacing={2} size={{ xs: 12, md: 9 }}>
@@ -82,7 +95,7 @@ function App() {
 
         {/* Gráfico */}
         <Grid sx={{ display: { xs: "none", md: "block" } }} size={{ xs: 12, md: 6 }}>
-          <ChartUI city={selectedOption}/>
+          <ChartUI city={selectedOption} />
         </Grid>
 
         {/* Tabla */}
@@ -91,7 +104,20 @@ function App() {
         </Grid>
 
         {/* Información adicional */}
-        <Grid size={{ xs: 12, md: 12 }}>Elemento: Información adicional</Grid>
+        <Grid item xs={12}>
+          {dataFetcherOutput && (
+            <ExtraInfoUI daily={dataFetcherOutput.daily} current={dataFetcherOutput.current} />
+          )}
+        </Grid>
+        {/* Recomendaciones dinámicas */}
+        <Grid item xs={12}>
+          {dataFetcherOutput && (
+            <RecommendationsUI
+              daily={dataFetcherOutput.daily}
+              current={dataFetcherOutput.current}
+            />
+          )}
+        </Grid>
       </Grid>
     </>
   )

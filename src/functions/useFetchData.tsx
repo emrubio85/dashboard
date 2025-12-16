@@ -33,7 +33,7 @@ export default function useFetchData(city: string | null): FetchResult {
                     throw new Error("Ciudad no soportada");
                 }
 
-                const URL = `https://api.open-meteo.com/v1/forecast?latitude=${coords.lat}&longitude=${coords.lon}&hourly=temperature_2m,wind_speed_10m&current=temperature_2m,relative_humidity_2m,apparent_temperature,wind_speed_10m`;
+                const URL = `https://api.open-meteo.com/v1/forecast?latitude=${coords.lat}&longitude=${coords.lon}&hourly=temperature_2m,wind_speed_10m&current=temperature_2m,relative_humidity_2m,apparent_temperature,wind_speed_10m&daily=sunrise,sunset,uv_index_max,temperature_2m_min,temperature_2m_max&timezone=auto`;
 
                 const response = await fetch(URL);
                 if (!response.ok) {
