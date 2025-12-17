@@ -1,4 +1,4 @@
-import { Grid } from "@mui/material";
+import { Grid} from "@mui/material";
 import IndicatorUI from "./IndicatorUI";
 import type { Daily, Current } from "../types/DashboardTypes";
 
@@ -62,12 +62,12 @@ function RecommendationsUI({ daily, current }: Props) {
     <Grid container spacing={2}>
       {recs.length > 0 ? (
         recs.map((rec, i) => (
-          <Grid item xs={12} md={6} key={i}>
+          <Grid key={i} size={{ xs: 12, md: 6 }}>
             <IndicatorUI title={rec.title} description={rec.description} />
           </Grid>
         ))
       ) : (
-        <Grid item xs={12}>
+        <Grid size={{ xs: 12}}>
           <IndicatorUI
             title="✅ Día tranquilo"
             description="No hay recomendaciones especiales hoy."

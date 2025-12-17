@@ -2,7 +2,7 @@
 //import reactLogo from './assets/react.svg'
 //import viteLogo from '/vite.svg'
 import './App.css'
-import { Grid } from '@mui/material';
+import { Grid} from '@mui/material';
 import HeaderUI from './components/HeaderUI';
 import AlertUI from './components/AlertUI';
 import SelectorUI from './components/SelectorUI';
@@ -38,7 +38,7 @@ function App() {
 
       <Grid container spacing={5} justifyContent="center" alignItems="center">
         {/* Encabezado */}
-        <Grid item xs={12} md={12}>
+        <Grid size={{ xs: 12, md: 12 }}>
           <HeaderUI>
             {/* Botón de modo oscuro */}
             <button onClick={toggleTheme}>
@@ -56,7 +56,7 @@ function App() {
         {/* Indicadores */}
         <Grid container spacing={2} size={{ xs: 12, md: 9 }}>
 
-          <Grid item size={{ xs: 12, md: 3 }}>
+          <Grid size={{ xs: 12, md: 3 }}>
             {dataFetcherOutput &&
               (<IndicatorUI
                 title='Temperatura (2m)'
@@ -64,7 +64,7 @@ function App() {
             }
           </Grid>
 
-          <Grid item size={{ xs: 12, md: 3 }}>
+          <Grid size={{ xs: 12, md: 3 }}>
             {dataFetcherOutput &&
               (<IndicatorUI
                 title='Temperatura Aparente'
@@ -73,7 +73,7 @@ function App() {
             {/* IndicatorUI con la Temperatura aparente en °C' */}
           </Grid>
 
-          <Grid item size={{ xs: 12, md: 3 }}>
+          <Grid size={{ xs: 12, md: 3 }}>
             {dataFetcherOutput &&
               (<IndicatorUI
                 title='Velocidad del Viento'
@@ -82,7 +82,7 @@ function App() {
             {/* IndicatorUI con la Velocidad del viento en km/h' */}
           </Grid>
 
-          <Grid item size={{ xs: 12, md: 3 }}>
+          <Grid size={{ xs: 12, md: 3 }}>
             {dataFetcherOutput &&
               (<IndicatorUI
                 title='Humedad Relativa'
@@ -104,13 +104,13 @@ function App() {
         </Grid>
 
         {/* Información adicional */}
-        <Grid item xs={12}>
+        <Grid size={{ xs: 12 }}>
           {dataFetcherOutput && (
             <ExtraInfoUI daily={dataFetcherOutput.daily} current={dataFetcherOutput.current} />
           )}
         </Grid>
         {/* Recomendaciones dinámicas */}
-        <Grid item xs={12}>
+        <Grid size={{ xs: 12 }}>
           {dataFetcherOutput && (
             <RecommendationsUI
               daily={dataFetcherOutput.daily}
