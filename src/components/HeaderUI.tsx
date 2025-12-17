@@ -1,6 +1,6 @@
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import { ReactNode } from 'react';
+import type { ReactNode } from 'react';
 
 interface HeaderProps {
     children?: ReactNode;
